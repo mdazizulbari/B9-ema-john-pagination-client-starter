@@ -12,6 +12,7 @@ import { Link, useLoaderData } from "react-router-dom";
 const Shop = () => {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const { count } = useLoaderData();
   console.log(count);
@@ -79,6 +80,20 @@ const Shop = () => {
     const value = Number(event.target.value);
     console.log(value);
     setItemsPerPage(value);
+    setCurrentPage(0);
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    // if (currentPage < numberOfPages - 1) {
+    if (currentPage < pages.length - 1) {
+      setCurrentPage(currentPage + 1);
+    }
   };
 
   return (
@@ -100,9 +115,18 @@ const Shop = () => {
         </Cart>
       </div>
       <div className="pagination">
+        <p>Current Page: {currentPage}</p>
+        <button onClick={handlePreviousPage}>Prev</button>
         {pages.map((page, index) => (
-          <button key={index}>{page}</button>
+          <button
+            onClick={() => setCurrentPage(page)}
+            className={currentPage === page && "selected"}
+            key={index}
+          >
+            {page}
+          </button>
         ))}
+        <button onClick={handleNextPage}>Next</button>
         <select
           name=""
           id=""
