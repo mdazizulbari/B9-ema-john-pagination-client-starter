@@ -15,6 +15,8 @@ const Shop = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const { count } = useLoaderData();
+  const storedCart = getShoppingCart();
+  const storedCartIds = Object.keys(storedCart);
   console.log(count);
   const numberOfPages = Math.ceil(count / itemsPerPage);
 
@@ -34,7 +36,6 @@ const Shop = () => {
   }, [currentPage, itemsPerPage]);
 
   useEffect(() => {
-    const storedCart = getShoppingCart();
     const savedCart = [];
     // step 1: get id of the addedProduct
     for (const id in storedCart) {
