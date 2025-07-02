@@ -13,7 +13,7 @@ const cartProductsLoader = async () => {
   });
 
   const products = await loadedProducts.json();
-  console.log("products:", products, typeof products);
+  // console.log("products:", products, typeof products);
   const savedCart = [];
 
   for (const id in storedCart) {
